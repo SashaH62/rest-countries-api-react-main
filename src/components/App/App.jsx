@@ -1,41 +1,25 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import CountryList from "../../pages/CountryList";
 import Country from "../../pages/Country";
-import { useEffect, useState } from "react";
+import Countries from "../../pages/Countries";
+import { CountriesProvider } from "../../contexts/CountriesContext";
+import Header from "../Header/Header";
+import { useState } from "react";
 
 function App() {
-  const BASE_URL = "https://restcountries.com";
-
-  const [countries, setCountries] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    async function fetchCountries() {
-      try {
-        setIsLoading(true);
-        const res = await fetch(BASE_URL);
-        const data = await res.json();
-        setCountries(data);
-        console.log(data);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchCountries();
-  }, []);
+  const [colorScheme, setColorScheme] = useState("light");
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={<CountryList countries={countries} isLoading={isLoading} />}
-        />
-        <Route path="/country" element={<Country />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <Header colorScheme={colorScheme} colorSchemeHandler={setColorScheme} />
+      <CountriesProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Countries />} />
+            <Route path="/country" element={<Country />} />
+          </Routes>
+        </BrowserRouter>
+      </CountriesProvider>
+    </>
   );
 }
 

@@ -1,0 +1,5 @@
+.countryList {
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+  gap: 4.6875rem;
+}
