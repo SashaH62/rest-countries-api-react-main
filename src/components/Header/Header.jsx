@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styles from "./Header.module.scss";
 
 function Header({ colorScheme, colorSchemeHandler }) {
@@ -7,8 +8,12 @@ function Header({ colorScheme, colorSchemeHandler }) {
 
   return (
     <header className={styles.header}>
-      <h1>Where in the world?</h1>
-      <button onClick={handleColorSchemeChange}>{colorScheme} Mode</button>
+      <div className={styles.headerContainer}>
+        <NavLink to="/">
+          <h1>Where in the world?</h1>
+        </NavLink>
+        <button onClick={handleColorSchemeChange}>{colorScheme} Mode</button>
+      </div>
     </header>
   );
 }

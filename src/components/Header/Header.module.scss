@@ -1,9 +1,15 @@
 .header {
-  max-width: 1280px;
-  width: 100%;
-  margin: 0 auto;
   height: 80px;
+  background-color: var(--primary-dark-2);
+  margin-bottom: 3rem;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+
+  .headerContainer {
+    max-width: 1280px;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }

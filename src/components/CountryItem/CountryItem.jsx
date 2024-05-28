@@ -1,28 +1,31 @@
+import { Link } from "react-router-dom";
 import styles from "./CountryItem.module.scss";
 
 function CountryItem({ country }) {
-  const {
-    name: { common },
-    population,
-    region,
-    capital,
-    flags: { svg },
-  } = country;
+  const { name, population, region, capital, flags } = country;
 
   return (
-    <div className={styles.countryItem}>
-      <div className={styles.imageContainer}>
-        <img src={svg} alt={common} />
+    <Link to={`/country/${name.common}`} className={styles.countryItemLink}>
+      <div className={styles.countryItem}>
+        <div className={styles.imageContainer}>
+          <img src={flags.svg} alt={name.common} />
+        </div>
+        <div className={styles.countryDetailsContainer}>
+          <h3>{name.common}</h3>
+          <ul>
+            <li>
+              <strong>Population:</strong> {population}
+            </li>
+            <li>
+              <strong>Region:</strong> {region}
+            </li>
+            <li>
+              <strong>Capital:</strong> {capital}
+            </li>
+          </ul>
+        </div>
       </div>
-      <div className={styles.countryDetailsContainer}>
-        <h3>{common}</h3>
-        <ul>
-          <li>Population: {population}</li>
-          <li>Region: {region}</li>
-          <li>Capital: {capital}</li>
-        </ul>
-      </div>
-    </div>
+    </Link>
   );
 }
 

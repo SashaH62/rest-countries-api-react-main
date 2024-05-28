@@ -1,0 +1,42 @@
+.countryContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4.6875rem;
+
+  .countryImage {
+    aspect-ratio: 560 / 401;
+    border-radius: 5px;
+    overflow: hidden;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  .countryData {
+    display: flex;
+    flex-direction: column;
+    padding: 5rem;
+    justify-content: center;
+
+    .countryDataColumns {
+      display: flex;
+      justify-content: space-between;
+
+      ul {
+        list-style: none;
+
+        li {
+          font-size: 16px;
+          margin-bottom: 1rem;
+          font-weight: 300;
+
+          strong {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}

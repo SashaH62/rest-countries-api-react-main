@@ -10,12 +10,17 @@ function App() {
 
   return (
     <>
-      <Header colorScheme={colorScheme} colorSchemeHandler={setColorScheme} />
       <CountriesProvider>
         <BrowserRouter>
+          <Header
+            colorScheme={colorScheme}
+            colorSchemeHandler={setColorScheme}
+          />
           <Routes>
-            <Route path="/" element={<Countries />} />
-            <Route path="/country" element={<Country />} />
+            <Route path="/" element={<Countries />}>
+              <Route path="/:region" element={<Countries />} />
+            </Route>
+            <Route path="country/:name" element={<Country />} />
           </Routes>
         </BrowserRouter>
       </CountriesProvider>
