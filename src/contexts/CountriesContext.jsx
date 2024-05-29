@@ -20,6 +20,7 @@ function CountriesProvider({ children }) {
   const [error, setError] = useState("");
 
   async function fetchCountries() {
+    console.log("yes");
     try {
       setIsLoading(true);
       setError("");
