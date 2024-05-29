@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import styles from "./CountryItem.module.scss";
+import { useCountries } from "../../contexts/CountriesContext";
 
 function CountryItem({ country }) {
+  const { convertPopulation } = useCountries();
+
   const { name, population, region, capital, flags } = country;
 
   return (
@@ -14,7 +17,7 @@ function CountryItem({ country }) {
           <h3>{name.common}</h3>
           <ul>
             <li>
-              <strong>Population:</strong> {population}
+              <strong>Population:</strong> {convertPopulation(population)}
             </li>
             <li>
               <strong>Region:</strong> {region}

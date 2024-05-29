@@ -2,11 +2,14 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4.6875rem;
+  align-items: center;
+  margin-top: 4rem;
 
   .countryImage {
     aspect-ratio: 560 / 401;
     border-radius: 5px;
     overflow: hidden;
+    box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.0294384);
 
     img {
       height: 100%;
@@ -17,15 +20,23 @@
   .countryData {
     display: flex;
     flex-direction: column;
-    padding: 5rem;
+    padding: 5rem 0;
     justify-content: center;
+
+    h2 {
+      margin-bottom: 2rem;
+    }
 
     .countryDataColumns {
       display: flex;
       justify-content: space-between;
+      gap: 3rem;
 
       ul {
         list-style: none;
+        flex-basis: 50%;
+        flex-shrink: 0;
+        flex-grow: 0;
 
         li {
           font-size: 16px;

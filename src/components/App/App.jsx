@@ -1,25 +1,23 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Country from "../../pages/Country";
+import Country from "../../pages/Country/Country";
 import Countries from "../../pages/Countries";
 import { CountriesProvider } from "../../contexts/CountriesContext";
 import Header from "../Header/Header";
-import { useState } from "react";
+import { getThemeMode } from "../../contexts/ThemeContext.jsx";
+import { useEffect } from "react";
 
 function App() {
-  const [colorScheme, setColorScheme] = useState("light");
+  useEffect(() => {
+    getThemeMode();
+  }, []);
 
   return (
     <>
       <CountriesProvider>
         <BrowserRouter>
-          <Header
-            colorScheme={colorScheme}
-            colorSchemeHandler={setColorScheme}
-          />
+          <Header />
           <Routes>
-            <Route path="/" element={<Countries />}>
-              <Route path="/:region" element={<Countries />} />
-            </Route>
+            <Route path="/" element={<Countries />} />
             <Route path="country/:name" element={<Country />} />
           </Routes>
         </BrowserRouter>

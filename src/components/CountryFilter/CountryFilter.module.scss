@@ -1,0 +1,25 @@
+.countryFormControl {
+  label {
+    font-size: 14px;
+    font-family: "Nunito Sans", sans-serif;
+    font-weight: 600;
+    color: var(--text-color);
+    line-height: 24px;
+  }
+
+  .countryFilter {
+    background-color: var(--accentBackground);
+    box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.0532439);
+    border: 0;
+    color: var(--text-color);
+
+    svg {
+      color: var(--text-color);
+    }
+
+    fieldset {
+      border: 0 !important;
+      color: var(--text-color);
+    }
+  }
+}

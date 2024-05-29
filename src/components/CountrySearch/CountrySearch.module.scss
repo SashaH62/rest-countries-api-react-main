@@ -1,0 +1,26 @@
+.searchInputContainer {
+  width: 100%;
+  max-width: 480px;
+  border-radius: 5px;
+  background-color: var(--accentBackground);
+  padding: 15px 30px 15px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .searchInput {
+    background-color: var(--accentBackground);
+    font-size: 14px;
+    max-width: 480px;
+    width: 100%;
+    outline: none;
+    border: 0;
+    color: var(--text-color);
+    font-family: "Nunito Sans", sans-serif;
+    font-weight: 600;
+
+    &::placeholder {
+      color: var(--text-color);
+    }
+  }
+}

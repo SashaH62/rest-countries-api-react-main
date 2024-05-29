@@ -1,10 +1,11 @@
 import CountryFilter from "../CountryFilter/CountryFilter";
 import CountrySearch from "../CountrySearch/CountrySearch";
+import styles from "./CountryFilterBar.module.scss";
 
 function CountryFilterBar() {
   return (
-    <section>
-      {/* <CountrySearch /> */}
+    <section className={styles.countryFilterBar}>
+      <CountrySearch />
       <CountryFilter />
     </section>
   );

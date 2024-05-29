@@ -49,25 +49,11 @@ function CountriesProvider({ children }) {
     }
   }
 
-  // async function getCurrentCountry(name) {
-  //   try {
-  //     setIsLoading(true);
-  //     setError("");
-  //     const res = await fetch(`${BASE_URL}/name/${name}`);
-  //     const data = await res.json();
-  //     setCurrentCountry(data);
-  //   } catch (err) {
-  //     console.error(err);
-  //     setError(err);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // }
-
   function getCurrentCountry(name) {
     setCurrentCountry(
       countries.filter((country) => country.name.common === name)
     );
+    setIsLoading(false);
   }
 
   function getContinents(countries) {
@@ -79,55 +65,51 @@ function CountriesProvider({ children }) {
       }
     }, []);
 
-    handleCountryFilter(continents[0]);
     return continents;
   }
 
+  function handleCountrySearch() {
+    let countriesSearch = [];
+    if (searchQuery) {
+      countriesSearch = filterCountries(filteredContinent).filter((country) =>
+        country.name.common.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredCountries(countriesSearch);
+    } else {
+      setFilteredCountries(
+        filteredContinent ? filterCountries(filteredContinent) : countries
+      );
+    }
+  }
+
   function filterCountries(continent) {
+    if (continent === "all") return countries;
     return countries.filter((country) => country.region === continent);
   }
 
-  function handleCountryFilter(continent) {
-    setFilteredContinent(continent);
-    setFilteredCountries(filterCountries(continent));
+  function convertPopulation(population) {
+    return population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-
-  // function handleCountrySearch(value) {
-  //   setSearchQuery(value);
-
-  //   if (searchQuery) {
-  //     setFilteredCountries((countries) => {
-  //       countries.map((country) =>
-  //         console.log(country.name.common.includes(searchQuery))
-  //       );
-  //       countries.filter((country) =>
-  //         country.name.common.toLowerCase().includes(searchQuery.toLowerCase())
-  //           .length > 0
-  //           ? countries.filter((country) =>
-  //               country.name.common.includes(searchQuery)
-  //             )
-  //           : "No results"
-  //       );
-  //     });
-  //   } else {
-  //     setFilteredContinent(filterCountries(filteredContinent));
-  //   }
-  // }
 
   return (
     <CountriesContext.Provider
       value={{
         countries,
+        fetchCountries,
         continents,
+        setFilteredContinent,
         filteredCountries,
+        setFilteredCountries,
         filteredContinent,
         searchQuery,
+        setSearchQuery,
         isLoading,
         error,
-        fetchCountries,
-        handleCountryFilter,
         getCurrentCountry,
         currentCountry,
+        convertPopulation,
+        filterCountries,
+        handleCountrySearch,
       }}
     >
       {children}
