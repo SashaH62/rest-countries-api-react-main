@@ -1,3 +1,4 @@
+import Button from "../Button/Button";
 import { useCountries } from "../../contexts/CountriesContext";
 import styles from "./Error.module.scss";
 
