@@ -7,7 +7,7 @@ function Error() {
   return (
     <div className={styles.errorMessage}>
       😣 Whoops! Looks like there has been an error. Please refresh the app.
-      <button onClick={fetchCountries}>🚀 Refresh app</button>
+      <Button onClick={fetchCountries}>🚀 Refresh app</Button>
     </div>
   );
 }
