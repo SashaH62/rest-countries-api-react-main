@@ -33,6 +33,7 @@ function CountryFilter() {
           label="Filter By Region"
           className={styles.countryFilter}
           IconComponent={() => <KeyboardArrowDownIcon />}
+          sx={{ fontSize: "14px" }}
         >
           <MenuItem key="all" value="all">
             All

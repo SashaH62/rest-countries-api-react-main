@@ -7,8 +7,8 @@ function CountryList() {
 
   return (
     <div className={styles.countryList}>
-      {filteredCountries.map((country, index) => (
-        <CountryItem country={country} key={index} />
+      {filteredCountries.map((country) => (
+        <CountryItem country={country} key={`${country.name.common}-card`} />
       ))}
     </div>
   );

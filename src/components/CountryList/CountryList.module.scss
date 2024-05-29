@@ -2,4 +2,10 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 4.6875rem;
+
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(1, 1fr);
+    padding: 0 3rem;
+    gap: 3rem;
+  }
 }

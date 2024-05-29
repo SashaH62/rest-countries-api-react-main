@@ -83,12 +83,16 @@ function CountriesProvider({ children }) {
   }
 
   function filterCountries(continent) {
-    if (continent === "all") return countries;
+    if (continent === "all" || !continent) return countries;
     return countries.filter((country) => country.region === continent);
   }
 
   function convertPopulation(population) {
     return population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function getBorderingCountries(countryCode) {
+    return countries.filter((country) => country.cca3 === countryCode);
   }
 
   return (
@@ -110,6 +114,7 @@ function CountriesProvider({ children }) {
         convertPopulation,
         filterCountries,
         handleCountrySearch,
+        getBorderingCountries,
       }}
     >
       {children}

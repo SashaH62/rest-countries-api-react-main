@@ -22,9 +22,17 @@ function CountryItem({ country }) {
             <li>
               <strong>Region:</strong> {region}
             </li>
-            <li>
-              <strong>Capital:</strong> {capital}
-            </li>
+            {capital && (
+              <li>
+                <strong>Capital: </strong>
+                {capital?.map((capitalCity, index) => (
+                  <span key={`capital-${index}`}>
+                    {capitalCity}
+                    {index + 1 < capital.length ? ", " : ""}
+                  </span>
+                ))}
+              </li>
+            )}
           </ul>
         </div>
       </div>

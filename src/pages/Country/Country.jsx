@@ -1,5 +1,5 @@
 import styles from "./Country.module.scss";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useCountries } from "../../contexts/CountriesContext";
 import { useEffect } from "react";
 import LoadingSpinner from "../../components/LoadingSpinner/LoadingSpinner";
@@ -22,6 +22,7 @@ function Country() {
     convertPopulation,
     setSearchQuery,
     setFilteredContinent,
+    getBorderingCountries,
   } = useCountries();
 
   useEffect(() => {
@@ -54,12 +55,21 @@ function Country() {
     languages,
     currencies,
     tld,
-  } = currentCountry[0];
+    borders,
+  } = currentCountry.at(0);
 
-  const nativeNames = Object.values(nativeName);
-  const languagesArr = Object.values(languages);
-  const currenciesArr = Object.values(currencies);
-  const tldArr = Object.values(tld);
+  const nativeNames = nativeName ? Object.values(nativeName) : [];
+  const languagesArr = languages ? Object.values(languages) : [];
+  const currenciesArr = currencies ? Object.values(currencies) : [];
+  const tldArr = tld ? Object.values(tld) : [];
+
+  let fetchedBorderCountries = borders
+    ? Object.values(
+        borders.reduce((arr, curr) => {
+          return [...arr, getBorderingCountries(curr)];
+        }, [])
+      )
+    : [];
 
   return (
     <Main>
@@ -78,33 +88,39 @@ function Country() {
           <h2>{name}</h2>
           <div className={styles.countryDataColumns}>
             <ul>
-              <li>
-                <strong>Native names: </strong>
-                {nativeNames.map((name, index) => (
-                  <span key={`nName-${index}`}>
-                    {name.common}
-                    {index + 1 < nativeNames.length ? ", " : ""}
-                  </span>
-                ))}
-              </li>
+              {nativeNames > 0 && (
+                <li>
+                  <strong>Native Names: </strong>
+                  {nativeNames?.map((name, index) => (
+                    <span key={`nName-${index}`}>
+                      {name.common}
+                      {index + 1 < nativeNames.length ? ", " : ""}
+                    </span>
+                  ))}
+                </li>
+              )}
               <li>
                 <strong>Population: </strong> {convertPopulation(population)}
               </li>
               <li>
                 <strong>Region: </strong> {region}
               </li>
-              <li>
-                <strong>Sub Region: </strong> {subregion}
-              </li>
-              <li>
-                <strong>Capital: </strong>
-                {capital.map((capitalCity, index) => (
-                  <span key={`capital-${index}`}>
-                    {capitalCity}
-                    {index + 1 < capital.length ? ", " : ""}
-                  </span>
-                ))}
-              </li>
+              {subregion && (
+                <li>
+                  <strong>Sub Region: </strong> {subregion}
+                </li>
+              )}
+              {capital && (
+                <li>
+                  <strong>Capital: </strong>
+                  {capital?.map((capitalCity, index) => (
+                    <span key={`capital-${index}`}>
+                      {capitalCity}
+                      {index + 1 < capital.length ? ", " : ""}
+                    </span>
+                  ))}
+                </li>
+              )}
             </ul>
             <ul>
               <li>
@@ -116,26 +132,49 @@ function Country() {
                   </span>
                 ))}
               </li>
-              <li>
-                <strong>Currencies: </strong>
-                {currenciesArr.map((currency, index) => (
-                  <span key={`currency-${index}`}>
-                    {currency.name}
-                    {index + 1 < currenciesArr.length ? ", " : ""}
-                  </span>
-                ))}
-              </li>
-              <li>
-                <strong>Languages: </strong>
-                {languagesArr.map((language, index) => (
-                  <span key={`language-${index}`}>
-                    {language}
-                    {index + 1 < languagesArr.length ? ", " : ""}
-                  </span>
-                ))}
-              </li>
+              {currencies && (
+                <li>
+                  <strong>Currencies: </strong>
+                  {currenciesArr.map((currency, index) => (
+                    <span key={`currency-${index}`}>
+                      {currency.name}
+                      {index + 1 < currenciesArr.length ? ", " : ""}
+                    </span>
+                  ))}
+                </li>
+              )}
+              {languages && (
+                <li>
+                  <strong>Languages: </strong>
+                  {languagesArr.map((language, index) => (
+                    <span key={`language-${index}`}>
+                      {language}
+                      {index + 1 < languagesArr.length ? ", " : ""}
+                    </span>
+                  ))}
+                </li>
+              )}
             </ul>
           </div>
+          {fetchedBorderCountries.length > 0 && (
+            <div className={styles.bordersList}>
+              <div>
+                <p>
+                  <strong>Border Countries: </strong>
+                </p>
+              </div>
+              <ul>
+                {fetchedBorderCountries.map((border, index) => (
+                  <Link
+                    to={`/country/${border.at(0).name.common}`}
+                    key={`border-${border.at(0).name.common}-link`}
+                  >
+                    <li>{border.at(0).name.common}</li>
+                  </Link>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </section>
     </Main>

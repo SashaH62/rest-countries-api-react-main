@@ -15,12 +15,14 @@
   --backgroundColor: #f2f2f2;
   --accentBackground: #fff;
   --text-color: #111517;
+  --placeholderColor: #c4c4c4;
 }
 
 .dark {
   --backgroundColor: #202c36;
   --accentBackground: #2b3844;
   --text-color: #fff;
+  --placeholderColor: #fff;
 }
 
 * {
@@ -60,11 +62,19 @@ button {
 h1 {
   font-size: 24px;
   font-weight: 800;
+
+  @media (max-width: 992px) {
+    font-size: 14px;
+  }
 }
 
 h2 {
   font-size: 32px;
   font-weight: 800;
+
+  @media (max-width: 992px) {
+    font-size: 22px;
+  }
 }
 
 h3 {
@@ -76,4 +86,18 @@ h3 {
 a {
   text-decoration: none;
   color: var(--text-color);
+}
+
+#menu-countries-filter {
+  .MuiPopover-paper {
+    margin-top: 10px;
+    background-color: var(--accentBackground);
+
+    ul {
+      li {
+        font-size: 14px;
+        color: var(--text-color);
+      }
+    }
+  }
 }
